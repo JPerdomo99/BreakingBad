@@ -2,7 +2,7 @@
     <div class="navigation mb-3">
         <v-app-bar 
             class="app-bar"
-            color="green darken-4"
+            color="blue darken-4"
             dense
             dark
             fixed
