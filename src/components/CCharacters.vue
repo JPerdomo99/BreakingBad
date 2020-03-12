@@ -37,15 +37,20 @@
         <!--Dialog-->
 
         <v-data-table
+        no-data-text="No data at the moment"
         :headers="headers"
         :items="data"
         hide-default-footer
         :server-items-length="itemsPerPageLimit"
         disable-sort
         class="elevation-3"
-        ></v-data-table>
+        >
+        <template v-slot:item.show="{  }">
+            <v-icon color="blue accent-4">visibility</v-icon>
+        </template>
+        </v-data-table>
 
-        <v-row>
+        <v-row >
             <v-col
             cols="auto"
             class="mr-auto"
@@ -60,7 +65,7 @@
             <v-col 
             cols="auto" 
             class="navButtons">
-                <v-btn v-if="page == 1"
+                <v-btn v-if="page <= 0"
                 fab
                 small 
                 disabled
@@ -79,10 +84,21 @@
                     <v-icon dark>keyboard_arrow_left</v-icon>
                 </v-btn>
                 <v-btn 
+                fab
+                small 
+                disabled
+                color="blue darken-4"
+                @click="nextPage()"
+                v-if="data.length == 0"
+                >
+                    <v-icon dark>keyboard_arrow_right</v-icon>
+                </v-btn>
+                <v-btn 
                 fab dark 
                 small 
                 color="blue darken-4"
                 @click="nextPage()"
+                v-if="data.length > 0"
                 >
                     <v-icon dark>keyboard_arrow_right</v-icon>
                 </v-btn>
@@ -107,19 +123,19 @@ export default {
                 { text: 'Nick Name', value: 'nickname', align: 'center' },
                 { text: 'Ocupation', value: 'occupation', align: 'center' },
                 { text: 'Status', value: 'status', align: 'center' },
-                { text: 'Actor', value: 'portrayed', align: 'center', align: 'center' },
-                { text: 'Show more', value: '', align: 'center'}
+                { text: 'Actor', value: 'portrayed', align: 'center', align: 'center' },                
+                { text: 'Show more', value: 'show', align: 'center'}
             ],
             data: [],
             itemsPerPageLimit: 0,
-            page: 1
+            page: 0,
         }
     },
     methods: {
         async getCharacters() {
             try {
                 this.showLoading({title: 'Please wait...', color: 'info'});
-                let datos = await Axios.get(`https://breakingbadapi.com/api/characters?category=Breaking+Bad&limit=${this.limitPage}&offset=${this.page}`);
+                let datos = await Axios.get(`https://breakingbadapi.com/api/characters?limit=${this.limitPage}&offset=${this.page}`);
                 this.itemsPerPageLimit = datos.data.length;
                 this.data = datos.data;
             } catch (error) {
@@ -129,17 +145,49 @@ export default {
             }
         },
         previousPage() {
-            if(this.page > 1) {
-                this.page = this.page - 1;
-                this.getCharacters();
+            if(this.page > 0) {
+                switch(this.limitPage){
+                    case 5:
+                        this.page = this.page - 6;
+                        this.getCharacters();
+                    break;
+                    case 10:
+                        this.page = this.page - 11;
+                        this.getCharacters();
+                    break;
+                    case 15:
+                        this.page = this.page - 16;
+                        this.getCharacters();
+                    break;
+                    case 20:
+                        this.page = this.page - 21;
+                        this.getCharacters();
+                    break;
+                }
             }
         },
         nextPage() {
-            this.page = this.page + 1;
-            this.getCharacters();
+            switch(this.limitPage){
+                case 5:
+                    this.page = this.page + 6;
+                    this.getCharacters();
+                break;
+                case 10:
+                    this.page = this.page + 11;
+                    this.getCharacters();
+                break;
+                case 15:
+                    this.page = this.page + 16;
+                    this.getCharacters();
+                break;
+                case 20:
+                    this.page = this.page + 21;
+                    this.getCharacters();
+                break;
+            }
         },
         start() {
-            this.page = 1;
+            this.page = 0;
             this.getCharacters();
         },
         ...mapMutations(['showLoading', 'hiddenLoading'])
@@ -149,6 +197,7 @@ export default {
     },
     watch: {
         limitPage() {
+            this.page = 0;
             this.getCharacters();
         }
     },
