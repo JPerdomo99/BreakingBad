@@ -45,9 +45,26 @@
         disable-sort
         class="elevation-3"
         >
-        <template v-slot:item.show="{  }">
-            <v-icon color="blue accent-4">visibility</v-icon>
-        </template>
+            <template v-slot:item.status="{ item }">
+                <v-icon 
+                color="green darken-3" 
+                v-if="item.status == 'Alive'"
+                >wifi</v-icon>
+                <v-icon 
+                color="red accent-4"
+                v-else>wifi_off
+                </v-icon>
+            </template>
+            <template v-slot:item.char_id="{ item }">  
+                <v-btn 
+                icon
+                :to="{ name: 'CharactersId', params: { id: item.char_id } }">
+                    <v-icon 
+                    color="blue accent-4"
+                    >visibility
+                    </v-icon>
+                </v-btn>
+            </template>
         </v-data-table>
 
         <v-row >
@@ -123,8 +140,8 @@ export default {
                 { text: 'Nick Name', value: 'nickname', align: 'center' },
                 { text: 'Ocupation', value: 'occupation', align: 'center' },
                 { text: 'Status', value: 'status', align: 'center' },
-                { text: 'Actor', value: 'portrayed', align: 'center', align: 'center' },                
-                { text: 'Show more', value: 'show', align: 'center'}
+                { text: 'Actor', value: 'portrayed', align: 'center', align: 'center' },
+                { text: 'Show more', value: 'char_id', align: 'center'}
             ],
             data: [],
             itemsPerPageLimit: 0,
