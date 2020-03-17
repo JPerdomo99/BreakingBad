@@ -24,7 +24,24 @@
                 </v-card>
             </v-dialog>
             <!--Dialog-->
-            <v-card shaped elevation="4" width="800">
+            <v-card
+            class="elevation-0 d-flex justify-center"
+            v-if="data == undefined || data.length == 0"
+            >   
+                <v-icon
+                color="red darken-1"
+                class="iconFail"
+                >
+                    sentiment_very_dissatisfied
+                </v-icon>
+                <v-card-title color="grey lighten-1" class="display-3 font-weight-thin">No data found</v-card-title>
+            </v-card>
+            <v-card 
+            shaped 
+            elevation="4" 
+            width="800"
+            v-else
+            >
                 <v-row>
                     <v-col cols="auto" xs="12">
                         <v-container>
@@ -91,13 +108,28 @@ export default {
         async getCharacter() {
             try {
                 this.showLoading({title: 'Please wait...', color: 'info'});
-                let datos = await Axios.get(`https://www.breakingbadapi.com/api/characters/${this.id}`);
+                let datos = await Axios.get(this.getUrl());
                 this.data = datos.data[0];
             } catch (error) {
                 console.log(error);
             } finally {
-                this.hiddenLoading({color: 'info'})
+                this.hiddenLoading({color: 'info'});
             }
+        },
+        getUrl() {
+            var reAB = /[A-Za-z]/;
+            var re09 = /[0-9]/;
+            var url;
+            if (reAB.test(this.id)) {
+                let patron = / /g;
+                let newValue = "+"; 
+                this.id = this.id.replace(patron, newValue);
+                url = `https://www.breakingbadapi.com/api/characters?name=${this.id}`;
+            } else if (re09.test(this.id)){
+                url = `https://www.breakingbadapi.com/api/characters/${this.id}`;
+            }
+
+            return url;
         },
         ...mapMutations(['showLoading', 'hiddenLoading'])
     },
@@ -106,13 +138,18 @@ export default {
     },
     mounted() {
         this.getCharacter();
+        console.log(this.data);
     }
 }
 </script>
 
 <style scoped>
-    .image{
+    .image {
         border-radius: 24px 0px 24px 0px !important;
+    }
+
+    .iconFail {
+        font-size: 200px !important;
     }
 
     @media only screen and (max-width: 750px) {

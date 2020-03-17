@@ -158,7 +158,7 @@ export default {
             } catch (error) {
                 console.log(error);
             } finally {
-                this.hiddenLoading({color: 'info'})
+                this.hiddenLoading({color: 'info'});
             }
         },
         previousPage() {
