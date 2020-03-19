@@ -7,11 +7,13 @@
                 <v-card-text class="subtitle-1 white--text">-{{ data.author }}</v-card-text>
             </v-card>
 
-            <h3 class="font-weight-regular mb-6">Other quotes by author</h3>
-            <v-card class="elevation-3 mt-3 mb-10" v-for="(quote, index) of dataQuotesbyAuthor" :key="index">
-                 <v-card-text class="font-italic font-weight-regular subtitle-1">"{{ quote.quote }}"</v-card-text>
-                 <v-card-text class="font-weight-regular subtitle-2">-{{ quote.author }}</v-card-text>
-            </v-card>
+            <div v-if="dataQuotesbyAuthor.length > 1">
+                <h3 class="font-weight-regular mb-6">Other quotes by author</h3>
+                <v-card class="elevation-3 mt-3 mb-10" v-for="(quote, index) of dataQuotesbyAuthor" :key="index">
+                    <v-card-text class="font-italic font-weight-regular subtitle-1">"{{ quote.quote }}"</v-card-text>
+                    <v-card-text class="font-weight-regular subtitle-2">-{{ quote.author }}</v-card-text>
+                </v-card>
+            </div>
         </v-container>
     </div>
 </template>

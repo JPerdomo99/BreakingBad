@@ -24,6 +24,8 @@
         </v-dialog>
         <!--Dialog-->
 
+        <h1 class="font-weight-light mb-4">Episodes</h1>
+
         <v-data-table
         no-data-text="No data at the moment"
         :headers="headers"

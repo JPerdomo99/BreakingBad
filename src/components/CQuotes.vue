@@ -25,6 +25,7 @@
         <!--Dialog-->
 
         <h1 class="font-weight-light mb-4">Quotes</h1>
+        
         <v-data-table
         no-data-text="No data at the moment"
         :headers="headers"
@@ -63,7 +64,7 @@
             color="blue darken-4"
             class="ml-3"
             @click="getQuotes(1)"
-            v-if="data.length > 0"
+            v-if="data.length > 0 || this.s == 31"
             >
                 <v-icon dark>keyboard_arrow_right</v-icon>
             </v-btn>

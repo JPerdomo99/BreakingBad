@@ -1,8 +1,8 @@
 <template>
-    <div class="navigation mb-3">
+    <div class="navigation">
         <v-app-bar 
             class="app-bar"
-            color="blue darken-4"
+            :color="colorNav"
             dense
             dark
             fixed
@@ -29,6 +29,7 @@
 <script>
 export default {
     name: 'Navigation',
+    props: ['colorNav'],
     data() {
         return {
             
@@ -46,11 +47,18 @@ export default {
 </script>
 
 <style scoped>
-    .app-bar{
+    .app-bar {
         border-radius: 0px 0px 94px 0px;
         -moz-border-radius: 0px 0px 94px 0px;
         -webkit-border-radius: 0px 0px 94px 0px;
         width: 136px;
         height: 40px !important;
+        margin-top: 64px !important;
+    }
+
+    @media only screen and (max-width: 960px) {
+        .app-bar {
+            margin-top: 56px !important;
+        }
     }
 </style>
