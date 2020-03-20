@@ -2,7 +2,7 @@
   <v-app>
     <Menu></Menu>
     <Navigation colorNav="blue accent-3"></Navigation>
-    <v-content class="mt-7 mb-5">
+    <v-content class="mt-0 mb-5">
       <v-container>
         <router-view/>
       </v-container>

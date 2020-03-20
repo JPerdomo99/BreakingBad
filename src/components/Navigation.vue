@@ -1,27 +1,27 @@
 <template>
     <div class="navigation">
-        <v-app-bar 
-            class="app-bar"
+        <v-app-bar
+            class="app-bar mt-3"
             :color="colorNav"
             dense
             dark
             fixed
             >
-                <v-spacer></v-spacer>
-                <v-btn 
-                class="mr-2 mb-2"
-                icon 
-                @click="previous()" 
-                >
-                    <v-icon size="35px">keyboard_arrow_left</v-icon>
-                </v-btn>
-                <v-btn 
-                class="mr-3 mb-2"
-                icon 
-                @click="next()" 
-                >
-                    <v-icon size="35px">keyboard_arrow_right</v-icon>
-                </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn 
+            class="mr-2 mb-2"
+            icon 
+            @click="previous()" 
+            >
+                <v-icon size="35px">keyboard_arrow_left</v-icon>
+            </v-btn>
+            <v-btn 
+            class="mr-3 mb-2"
+            icon 
+            @click="next()" 
+            >
+            <v-icon size="35px">keyboard_arrow_right</v-icon>
+            </v-btn>
         </v-app-bar>
     </div>
 </template>
@@ -48,17 +48,12 @@ export default {
 
 <style scoped>
     .app-bar {
-        border-radius: 0px 0px 94px 0px;
-        -moz-border-radius: 0px 0px 94px 0px;
-        -webkit-border-radius: 0px 0px 94px 0px;
+        border-radius: 49px 49px 49px 49px !important;
+        -moz-border-radius: 49px 49px 49px 49px !important;
+        -webkit-border-radius: 49px 49px 49px 49px !important;
         width: 136px;
         height: 40px !important;
-        margin-top: 64px !important;
+        margin: auto !important;
     }
 
-    @media only screen and (max-width: 960px) {
-        .app-bar {
-            margin-top: 56px !important;
-        }
-    }
 </style>

@@ -11,7 +11,7 @@
                 <v-btn outlined color="primary" class="mt-3" @click="start()">Start</v-btn>
             </v-col>
         </v-row>
-        
+
         <!--Dialog-->
         <v-dialog
             v-model="loading.state"
@@ -66,7 +66,7 @@
                 </v-btn>
             </template>
         </v-data-table>
-
+        
         <v-row >
             <v-col
             cols="auto"
@@ -146,6 +146,7 @@ export default {
             data: [],
             itemsPerPageLimit: 0,
             page: 0,
+            expand: true
         }
     },
     methods: {
